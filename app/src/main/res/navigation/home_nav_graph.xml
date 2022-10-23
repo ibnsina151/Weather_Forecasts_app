@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav_graph"
+    app:startDestination="@id/weatherForecastsFragment">
+
+    <fragment
+        android:id="@+id/weatherForecastsFragment"
+        android:name="ai.munim.testassignment_weatherforecasts.fragment.WeatherForecastsFragment"
+        tools:layout="@layout/fragment_weather_forecasts_info_details"
+        android:label="WeatherForecastsFragment" >
+
+    </fragment>
+
+
+</navigation>

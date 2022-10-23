@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Test Assignment -  Weather Forecasts</string>
+    <string name="txt_refreshing">Refreshing...</string>
+    <string name="txt_no_internet_access">No Internet Access</string>
+
+    <string name="txt_temp_min_max">Min %d °C ----- Max %d °C</string>
+    <string name="txt_current_temperature">%d°</string>
+    <string name="txt_five_days_forecasts">5-DAY FORECAST</string>
+    <string name="txt_humidity">HUMIDITY %d/%</string>
+    <string name="text_provide_permission">"Allow the process to continue "</string>
+    <string name="txt_not_internet_access">No Internet Access</string>
+    <string name="txt_refreshed">Refreshed</string>
+
+
+</resources>
