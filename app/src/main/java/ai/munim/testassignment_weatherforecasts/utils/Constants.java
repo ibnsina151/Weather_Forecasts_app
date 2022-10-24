@@ -33,4 +33,6 @@ public interface Constants {
 
     int hour_in_millis = 60*60*1000;
 
+    String Rain = "Rain";
+    long MILLIES = 1000;
 }

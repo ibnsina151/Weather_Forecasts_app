@@ -11,14 +11,18 @@ import ai.munim.testassignment_weatherforecasts.dbhelper.DbConstants
 import ai.munim.testassignment_weatherforecasts.dbhelper.database.ProjectDB
 import ai.munim.testassignment_weatherforecasts.di.qualifiers.DatabaseInfo
 import ai.munim.testassignment_weatherforecasts.di.qualifiers.PreferenceInfo
+import ai.munim.testassignment_weatherforecasts.di.qualifiers.datafeatchingworker
+import ai.munim.testassignment_weatherforecasts.di.qualifiers.notificationworker
 import ai.munim.testassignment_weatherforecasts.helper.LocationManager
 import ai.munim.testassignment_weatherforecasts.helper.PermissionManager
 import ai.munim.testassignment_weatherforecasts.utils.WeatherForecastsDataFetchingWorker
+import ai.munim.testassignment_weatherforecasts.utils.WeatherForecastsNotificationWorker
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
 import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -101,11 +105,35 @@ object AppModule {
 
     @Provides
     @Singleton
+    @datafeatchingworker
     fun periodicWorkerRequest(): PeriodicWorkRequest {
         return PeriodicWorkRequest.Builder(
             WeatherForecastsDataFetchingWorker::class.java,
             12, TimeUnit.HOURS
         ).build()
+    }
+
+
+    @Provides
+    @Singleton
+    @notificationworker
+    fun periodicWorkerRequestNotificationBeforeRain(): PeriodicWorkRequest {
+        return PeriodicWorkRequest.Builder(
+            WeatherForecastsNotificationWorker::class.java,
+            15, TimeUnit.MINUTES
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideWorkManager(
+        context: Context,
+        @notificationworker notification: PeriodicWorkRequest,
+        @datafeatchingworker data: PeriodicWorkRequest) : WorkManager {
+        val workManager  =WorkManager.getInstance(context)
+        workManager.enqueue(notification)
+        workManager.enqueue(data)
+        return workManager
     }
 
 }

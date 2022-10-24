@@ -18,11 +18,11 @@ class WeatherForecastsViewHolder(
     fun bindTo(item: WeatherListModel) {
         mWeatherListModel = item;
 
-        mBinding.txtDate.setText(CommonTasks.getDateTimeFromTimestamp(item.dt))
-        mBinding.txtHumidity.setText(String.format(itemView.context.getString(R.string.txt_humidity),item.humidity))
+        mBinding.txtDate.setText(item.dtTxt)
+        mBinding.txtHumidity.setText(String.format(itemView.context.getString(R.string.txt_humidity),item.humidity.toString()))
         mBinding.txtTempRange.setText(String.format(itemView.context.getString(R.string.txt_temp_min_max),Math.round(
-            item.tempMin?.minus(Constants.kelvin) ?:0.0),
-            item.tempMax?.minus(Constants.kelvin) ?:0.0))
+            item.tempMin?.minus(Constants.kelvin) ?:0.0).toString(),
+            Math.round(item.tempMax?.minus(Constants.kelvin) ?:0.0).toString()))
 
         mBinding.ivWeatherCondition.setImageDrawable(item.weather.get(0).icon?.let {
             CommonTasks.getImage(

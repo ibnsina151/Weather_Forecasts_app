@@ -192,7 +192,7 @@ class CommonTasks {
                     model.wind?.gust,
                     model.visibility,
                     model.rain?._3h,
-                    model.sys?.pod
+                    model.dtTxt
                 )
                 temp.add(temp_w)
             }

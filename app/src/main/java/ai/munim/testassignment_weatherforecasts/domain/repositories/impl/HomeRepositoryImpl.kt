@@ -53,6 +53,7 @@ class HomeRepositoryImpl(
                 val data = response.body()
                 val msg = data!!.message
                 if (response.isSuccessful){
+                    deleteAllWeatherInfo()
                     saveWeatherInfo(Conversion.getWeatherEntity(mapper.mapToDomainModel(data)))
                     weatherForecastsModel.value = Resource.success(mapper.mapToDomainModel(data))
                 }else{

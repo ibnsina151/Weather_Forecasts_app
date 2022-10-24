@@ -41,8 +41,10 @@ class WeatherForecastsFragment() : Fragment() {
 
     private var data_model: ArrayList<WeatherListModel> = ArrayList()
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mBinding = FragmentWeatherForecastsInfoDetailsBinding.inflate(layoutInflater)
+        super.onViewCreated(view, savedInstanceState)
         initVariable()
         proceedRequest()
         subscribeRoom()
@@ -58,7 +60,8 @@ class WeatherForecastsFragment() : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_weather_forecasts_info_details, container, false)
+        mBinding = FragmentWeatherForecastsInfoDetailsBinding.inflate(inflater,container,false)
+        return mBinding.root
     }
 
     private fun subscribeLocation() {
@@ -73,7 +76,6 @@ class WeatherForecastsFragment() : Fragment() {
                 data_model.addAll(Conversion.getWeatherForecastsModel(it.get(0)).list!!)
                 weatherForecastsAdapter.submitList(data_model)
                 weatherForecastsAdapter.notifyDataSetChanged()
-                mBinding.pbRefreshing.visibility = GONE
                 mBinding.txtRefreshing.setText(getString(R.string.txt_refreshed))
 
             }
@@ -81,7 +83,6 @@ class WeatherForecastsFragment() : Fragment() {
     }
 
     private fun unsubscribeLocation() {
-        mBinding.pbRefreshing.visibility = View.VISIBLE
         mViewModel.getLocationManager()?.removeObserver(mLocationChangeObserver)
     }
 
@@ -108,7 +109,6 @@ class WeatherForecastsFragment() : Fragment() {
 
                         }
                         Status.SUCCESS ->{
-                            mBinding.pbRefreshing.visibility = GONE
                             mBinding.txtRefreshing.setText(getString(R.string.txt_refreshed))
                         }
                         Status.ERROR ->{

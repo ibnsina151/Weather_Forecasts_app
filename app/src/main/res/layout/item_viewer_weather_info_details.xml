@@ -14,7 +14,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="Thursday, October 27, 2022  6:00:00 PM"
-            android:textSize="@dimen/text_size_subhead_material"
+            android:textSize="@dimen/text_size_small_material"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +26,6 @@
             android:layout_height="24dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/weather10n"
             app:layout_constraintBottom_toBottomOf="@+id/txt_humidity"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
